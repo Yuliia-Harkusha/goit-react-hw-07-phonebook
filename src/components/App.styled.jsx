@@ -47,14 +47,6 @@ export const ContactsTitle = styled.h2`
   color: ${props => props.theme.colors.gray};
 `;
 
-export const SearchInput = styled.input`
-  padding: ${props => props.theme.spacing(2)};
-  margin-bottom: ${props => props.theme.spacing(4)};
-  :focus-visible {
-    outline-color: ${props => props.theme.colors.gray};
-  }
-`;
-
 export const DefaultText = styled.p`
   font-size: ${props => props.theme.fontSizes.small};
   font-weight: 500;

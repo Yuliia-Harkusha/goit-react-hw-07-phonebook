@@ -2,18 +2,12 @@ import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { useSelector, useDispatch } from 'react-redux';
 import { useFetchContactsQuery, useAddContactMutation } from 'redux/api';
-
-// import { getContacts } from 'redux/selectors';
 import { FormItem, Input, Label, Button } from './ContactForm.styled';
 
 export const FormAddContact = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-
-  // const contacts = useSelector(getContacts);
-  // const dispatch = useDispatch();
 
   const [addContact] = useAddContactMutation();
   const { data: contacts } = useFetchContactsQuery();

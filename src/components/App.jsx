@@ -1,11 +1,10 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { changeFilter } from 'redux/contactsSlice';
-import { getFilter } from 'redux/selectors';
 import { useFetchContactsQuery, useDeleteContactMutation } from 'redux/api';
+import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FormAddContact } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
+import { Filter } from './Filter/Filter';
 import {
   Container,
   Card,
@@ -13,15 +12,14 @@ import {
   Accent,
   ContactsCard,
   ContactsTitle,
-  SearchInput,
   DefaultText,
 } from './App.styled';
 
 export const App = () => {
-  const { data: contacts, isLoading, isSuccess } = useFetchContactsQuery();
+  const { data: contacts } = useFetchContactsQuery();
   const [deleteContact] = useDeleteContactMutation();
-  const filter = useSelector(getFilter);
-  const dispatch = useDispatch();
+
+  const [filter, setFilter] = useState('');
 
   const onDeleteContact = id => {
     deleteContact(id);
@@ -29,7 +27,7 @@ export const App = () => {
   };
 
   const handleChangeFilter = e => {
-    dispatch(changeFilter(e.target.value));
+    setFilter(e.currentTarget.value);
   };
 
   const getFilteredContacts = () => {
@@ -61,13 +59,7 @@ export const App = () => {
 
       <ContactsCard>
         <ContactsTitle>Contacts</ContactsTitle>
-        <SearchInput
-          type="text"
-          name="filter"
-          onChange={handleChangeFilter}
-          value={filter}
-          placeholder="Search"
-        />
+        <Filter handleChangeFilter={handleChangeFilter} filter={filter} />
         {contacts ? (
           <ContactList
             items={filteredContacts}
