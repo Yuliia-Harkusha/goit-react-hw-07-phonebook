@@ -9,3 +9,5 @@ export const contactsSlice = createSlice({
     },
   },
 });
+// export const { changeFilter } = contactsSlice.actions;
+// export const getFilter = state => state.filter;

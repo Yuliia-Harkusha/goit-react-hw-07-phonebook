@@ -1,6 +1,6 @@
-import { useFetchContactsQuery, useDeleteContactMutation } from 'redux/api';
+import { useFetchContactsQuery } from 'redux/api';
 import { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FormAddContact } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
@@ -17,14 +17,8 @@ import {
 
 export const App = () => {
   const { data: contacts } = useFetchContactsQuery();
-  const [deleteContact] = useDeleteContactMutation();
 
   const [filter, setFilter] = useState('');
-
-  const onDeleteContact = id => {
-    deleteContact(id);
-    toast.info('The contact has been successfully deleted');
-  };
 
   const handleChangeFilter = e => {
     setFilter(e.currentTarget.value);
@@ -61,10 +55,7 @@ export const App = () => {
         <ContactsTitle>Contacts</ContactsTitle>
         <Filter handleChangeFilter={handleChangeFilter} filter={filter} />
         {contacts ? (
-          <ContactList
-            items={filteredContacts}
-            removeContact={onDeleteContact}
-          />
+          <ContactList items={filteredContacts} />
         ) : (
           <DefaultText>Contact list is empty</DefaultText>
         )}
