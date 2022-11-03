@@ -4,7 +4,7 @@ import { contactsSlice } from './contactsSlice';
 
 export const store = configureStore({
   reducer: {
-    filter: contactsSlice,
+    filter: contactsSlice.reducer,
     [contactsApi.reducerPath]: contactsApi.reducer,
   },
 
